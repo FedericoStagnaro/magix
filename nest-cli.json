@@ -10,13 +10,13 @@
   "monorepo": true,
   "root": "apps/magix",
   "projects": {
-    "magix": {
+    "main_http": {
       "type": "application",
-      "root": "apps/magix",
+      "root": "apps/main_http",
       "entryFile": "main",
-      "sourceRoot": "apps/magix/src",
+      "sourceRoot": "apps/main_http/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/magix/tsconfig.app.json"
+        "tsConfigPath": "apps/main_http/tsconfig.app.json"
       }
     },
     "app_users": {
@@ -35,6 +35,15 @@
       "sourceRoot": "apps/app_products/src",
       "compilerOptions": {
         "tsConfigPath": "apps/app_products/tsconfig.app.json"
+      }
+    },
+    "app_sales": {
+      "type": "application",
+      "root": "apps/app_sales",
+      "entryFile": "main",
+      "sourceRoot": "apps/app_sales/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/app_sales/tsconfig.app.json"
       }
     }
   }
