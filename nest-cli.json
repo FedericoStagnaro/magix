@@ -28,15 +28,6 @@
         "tsConfigPath": "apps/app_users/tsconfig.app.json"
       }
     },
-    "app_wands": {
-      "type": "application",
-      "root": "apps/app_wands",
-      "entryFile": "main",
-      "sourceRoot": "apps/app_wands/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/app_wands/tsconfig.app.json"
-      }
-    },
     "app_products": {
       "type": "application",
       "root": "apps/app_products",
