@@ -1,8 +1,50 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/magix/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/magix/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/magix",
+  "projects": {
+    "magix": {
+      "type": "application",
+      "root": "apps/magix",
+      "entryFile": "main",
+      "sourceRoot": "apps/magix/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/magix/tsconfig.app.json"
+      }
+    },
+    "app_users": {
+      "type": "application",
+      "root": "apps/app_users",
+      "entryFile": "main",
+      "sourceRoot": "apps/app_users/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/app_users/tsconfig.app.json"
+      }
+    },
+    "app_wands": {
+      "type": "application",
+      "root": "apps/app_wands",
+      "entryFile": "main",
+      "sourceRoot": "apps/app_wands/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/app_wands/tsconfig.app.json"
+      }
+    },
+    "app_products": {
+      "type": "application",
+      "root": "apps/app_products",
+      "entryFile": "main",
+      "sourceRoot": "apps/app_products/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/app_products/tsconfig.app.json"
+      }
+    }
   }
 }
