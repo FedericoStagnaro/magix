@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
@@ -9,27 +9,47 @@ export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @MessagePattern('createRole')
-  create(@Payload() createRoleDto: CreateRoleDto) {
-    return this.rolesService.create(createRoleDto);
+  async create(@Payload() createRoleDto: CreateRoleDto) {
+    try {
+      return await this.rolesService.create(createRoleDto);
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 
   @MessagePattern('findAllRoles')
-  findAll() {
-    return this.rolesService.findAll();
+  async findAll() {
+    try {
+      return await this.rolesService.findAll();
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 
   @MessagePattern('findOneRole')
-  findOne(@Payload() id: number) {
-    return this.rolesService.findOne(id);
+  async findOne(@Payload() id: number) {
+    try {
+      return await this.rolesService.findOne(id);
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 
   @MessagePattern('updateRole')
-  update(@Payload() updateRoleDto: UpdateRoleDto) {
-    return this.rolesService.update(updateRoleDto.id, updateRoleDto);
+  async update(@Payload() updateRoleDto: UpdateRoleDto) {
+    try {
+      return await this.rolesService.update(updateRoleDto.id, updateRoleDto);
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 
   @MessagePattern('removeRole')
-  remove(@Payload() id: number) {
-    return this.rolesService.remove(id);
+  async remove(@Payload() id: number) {
+    try {
+      return await this.rolesService.remove(id);
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 }

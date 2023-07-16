@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
-import { MainHttpController } from './main_http.controller';
-import { MainHttpService } from './main_http.service';
+
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { RpcExceptionInterceptor } from './services/rpc_exception_interceptor';
 
 @Module({
-  imports: [],
-  controllers: [MainHttpController],
-  providers: [MainHttpService],
+  imports: [UsersModule, RolesModule],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RpcExceptionInterceptor,
+    },
+  ],
 })
 export class MainHttpModule {}
