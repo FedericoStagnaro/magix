@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -8,8 +7,7 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from './entities/role.entity';
-import { DeleteResult, Repository } from 'typeorm';
-import { RpcException } from '@nestjs/microservices';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class RolesService {
@@ -18,32 +16,44 @@ export class RolesService {
   ) {}
 
   async create(createRoleDto: CreateRoleDto) {
-    const newRole = this.roleRepository.create(createRoleDto);
-    return await this.roleRepository.save(newRole);
+    try {
+      const newRole: Role = this.roleRepository.create(createRoleDto);
+      return await this.roleRepository.save(newRole);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async findAll() {
-    return await this.roleRepository.find({
-      select: { description: true, id: true },
-    });
+    try {
+      return await this.roleRepository.find({
+        select: { description: true, id: true },
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async findOne(id: number) {
-    const result = await this.roleRepository.findOne({ where: { id } });
-    if (result) {
-      return result;
-    } else {
-      throw new Error('No se encontró el item buscado'); // TODO: Cambiar a ingles
+    let res: Role;
+    try {
+      res = await this.roleRepository.findOne({ where: { id } });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
+    if (!res) throw new NotFoundException();
+    return res;
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
-    const res = await this.roleRepository.update(id, updateRoleDto);
-    if (res.affected === 1) {
-      return await this.roleRepository.findOne({ where: { id } });
-    } else {
-      throw new Error('No se encontró el item a actualizar'); // TODO: Cambiar a ingles
+    let res: UpdateResult;
+    try {
+      res = await this.roleRepository.update(id, updateRoleDto);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
+    if (res.affected !== 1) throw new NotFoundException();
+    return await this.roleRepository.findOne({ where: { id } });
   }
 
   async remove(id: number) {
@@ -54,6 +64,6 @@ export class RolesService {
       throw new InternalServerErrorException(error);
     }
     if (res.affected !== 1) throw new NotFoundException();
-    else return true;
+    return true;
   }
 }
