@@ -1,9 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from './entities/role.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class RolesService {
@@ -41,11 +47,13 @@ export class RolesService {
   }
 
   async remove(id: number) {
-    const res = await this.roleRepository.delete(id);
-    if (res.affected === 1) {
-      return true;
-    } else {
-      throw new Error('No se encontro el item a borrar'); // TODO: Cambiar a ingles
+    let res: DeleteResult;
+    try {
+      res = await this.roleRepository.delete(id);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
+    if (res.affected !== 1) throw new NotFoundException();
+    else return true;
   }
 }

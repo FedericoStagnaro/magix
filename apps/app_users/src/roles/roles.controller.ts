@@ -46,10 +46,6 @@ export class RolesController {
 
   @MessagePattern('removeRole')
   async remove(@Payload() id: number) {
-    try {
-      return await this.rolesService.remove(id);
-    } catch (error) {
-      throw new RpcException(error.message);
-    }
+    return await this.rolesService.remove(id);
   }
 }

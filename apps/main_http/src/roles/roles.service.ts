@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ClientProxy } from '@nestjs/microservices';
@@ -48,10 +48,6 @@ export class RolesService {
   }
 
   async remove(id: number) {
-    try {
-      return await lastValueFrom(this.roleClient.send('removeRole', id));
-    } catch (error) {
-      throw Error(error.message);
-    }
+    return await lastValueFrom(this.roleClient.send('removeRole', id));
   }
 }

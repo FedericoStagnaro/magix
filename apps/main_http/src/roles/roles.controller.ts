@@ -70,15 +70,7 @@ export class RolesController {
   }
 
   @Delete(':id')
-  async remove(
-    @Param('id') id: string,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    try {
-      await this.rolesService.remove(+id);
-      res.status(HttpStatus.NO_CONTENT).send();
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    }
+  async remove(@Param('id') id: string) {
+    return await this.rolesService.remove(+id);
   }
 }

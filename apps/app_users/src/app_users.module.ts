@@ -4,6 +4,8 @@ import { RolesModule } from './roles/roles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { Role } from './roles/entities/role.entity';
+import { APP_FILTER } from '@nestjs/core';
+import { CatchAllExceptionFilter } from './filters/catch.all.exception.filter';
 
 @Module({
   imports: [
@@ -21,6 +23,11 @@ import { Role } from './roles/entities/role.entity';
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: CatchAllExceptionFilter,
+    },
+  ],
 })
 export class AppUsersModule {}
