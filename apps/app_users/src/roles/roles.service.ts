@@ -46,7 +46,7 @@ export class RolesService {
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
-    if (!res) throw new NotFoundException();
+    if (!res) throw new NotFoundException('Not found role');
     return res;
   }
 
@@ -61,7 +61,7 @@ export class RolesService {
         throw new InternalServerErrorException(error);
       }
     }
-    if (res.affected !== 1) throw new NotFoundException();
+    if (res.affected !== 1) throw new NotFoundException('Not found role');
     return await this.roleRepository.findOne({ where: { id } });
   }
 
@@ -72,7 +72,7 @@ export class RolesService {
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
-    if (res.affected !== 1) throw new NotFoundException();
+    if (res.affected !== 1) throw new NotFoundException('Not found role');
     return true;
   }
 }
