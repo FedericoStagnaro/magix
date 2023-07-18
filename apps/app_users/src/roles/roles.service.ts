@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -20,7 +21,11 @@ export class RolesService {
       const newRole: Role = this.roleRepository.create(createRoleDto);
       return await this.roleRepository.save(newRole);
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      if (error.name === 'QueryFailedError') {
+        throw new BadRequestException(error);
+      } else {
+        throw new InternalServerErrorException(error);
+      }
     }
   }
 
@@ -50,7 +55,11 @@ export class RolesService {
     try {
       res = await this.roleRepository.update(id, updateRoleDto);
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      if (error.name === 'QueryFailedError') {
+        throw new BadRequestException(error);
+      } else {
+        throw new InternalServerErrorException(error);
+      }
     }
     if (res.affected !== 1) throw new NotFoundException();
     return await this.roleRepository.findOne({ where: { id } });
