@@ -10,7 +10,6 @@ import { CustomClientNatsProxy } from '../clientProxy/custom.client.nats.proxy';
       {
         name: 'USERS_SERVICE',
         customClass: CustomClientNatsProxy,
-        // options: ['nats://localhost:4222'], // TODO: Llevar configuracion a la customizacion del clienteProxy
       },
     ]),
   ],
