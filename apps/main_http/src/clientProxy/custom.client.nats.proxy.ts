@@ -8,10 +8,7 @@ export class CustomClientNatsProxy extends ClientNats {
 
   serializeError(err: Error | any) {
     if (err.status === 'HTTP EXCEPTION') {
-      return new HttpException(
-        err.message.response,
-        err.message.response.statusCode,
-      );
+      return new HttpException(err.message, err.message.statusCode);
     } else if (err.status === 'RPC EXCEPTION') {
       return new RpcException(err.message);
     } else {
