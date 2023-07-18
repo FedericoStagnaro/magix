@@ -3,14 +3,20 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PasswordService } from '../services/password.service';
 
 @Controller()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly passwordService: PasswordService,
+  ) {}
 
   @MessagePattern('createUser')
   create(@Payload() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    const password = this.passwordService.enconde(createUserDto.password);
+    const userSaved = this.usersService.create({ ...createUserDto, password });
+    return userSaved;
   }
 
   @MessagePattern('findAllUsers')

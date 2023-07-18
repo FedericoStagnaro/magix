@@ -23,7 +23,13 @@ export class CatchQueryException implements ExceptionFilter {
           'Error en los valores de referencia',
         );
         break;
+      case 'ER_DUP_ENTRY':
+        returnedError = new BadRequestException(error.sqlMessage);
+        break;
+
       default:
+        console.log('DEFAULT: Nuevo Error', exception.driverError);
+
         returnedError = new InternalServerErrorException('Database error');
         break;
     }

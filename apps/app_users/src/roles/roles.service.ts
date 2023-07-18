@@ -8,7 +8,12 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from './entities/role.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import {
+  DeleteResult,
+  QueryFailedError,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 
 @Injectable()
 export class RolesService {
@@ -20,9 +25,9 @@ export class RolesService {
     try {
       const newRole: Role = this.roleRepository.create(createRoleDto);
       return await this.roleRepository.save(newRole);
-    } catch (error) {
-      if (error.name === 'QueryFailedError') {
-        throw new BadRequestException(error);
+    } catch (error: Error | QueryFailedError | any) {
+      if (error instanceof QueryFailedError) {
+        throw new BadRequestException(error.message);
       } else {
         throw new InternalServerErrorException(error);
       }
@@ -54,9 +59,9 @@ export class RolesService {
     let res: UpdateResult;
     try {
       res = await this.roleRepository.update(id, updateRoleDto);
-    } catch (error) {
-      if (error.name === 'QueryFailedError') {
-        throw new BadRequestException(error);
+    } catch (error: Error | QueryFailedError | any) {
+      if (error instanceof QueryFailedError) {
+        throw new BadRequestException(error.message);
       } else {
         throw new InternalServerErrorException(error);
       }

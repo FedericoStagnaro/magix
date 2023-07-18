@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
 
 @Entity()
 export class Role {
@@ -7,4 +13,7 @@ export class Role {
 
   @Column({ unique: true })
   description: string;
+
+  @OneToMany('User', (user: any) => user.roleId)
+  user: Relation<'User[]'>;
 }

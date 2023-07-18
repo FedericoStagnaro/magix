@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
   Relation,
 } from 'typeorm';
@@ -18,7 +18,10 @@ export class User {
   @Column()
   lastname: string;
 
-  @Column()
+  @Column({ unique: true })
+  email: string;
+
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -27,7 +30,10 @@ export class User {
   @Column()
   birthday: Date;
 
-  @OneToOne('Role', (role: any) => role.id)
-  @JoinColumn()
-  role: Relation<'Role'>;
+  @Column({ type: 'integer' })
+  @ManyToOne('Role', { nullable: false })
+  @JoinColumn({
+    name: 'role_id',
+  })
+  roleId: Relation<'Role'>;
 }
