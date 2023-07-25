@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+/apps/app_users/src/auth/constant.ts
 
 # Logs
 logs

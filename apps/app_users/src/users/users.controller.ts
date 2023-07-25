@@ -1,4 +1,8 @@
-import { Controller } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  UseInterceptors,
+} from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -6,6 +10,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PasswordService } from '../services/password.service';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor) // Para cada endpoint en este controllador , filtrara los datos en respuesta
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,

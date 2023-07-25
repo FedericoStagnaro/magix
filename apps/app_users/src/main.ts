@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppUsersModule } from './app_users.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ValidationPipe } from '@nestjs/common';
-import { CatchAllExceptionFilter } from './filters/catch.all.exception.filter';
-import { CatchHttpException } from './filters/catch.http.exception';
-import { CatchQueryException } from './filters/catch.query.exception';
+import { CatchAllExceptionFilter } from './common/filters/catch.all.exception.filter';
+import { CatchHttpException } from './common/filters/catch.http.exception';
+import { CatchQueryException } from './common/filters/catch.query.exception';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(

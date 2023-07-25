@@ -4,7 +4,7 @@ import { genSaltSync, hashSync, compareSync } from 'bcrypt';
 @Injectable()
 export class PasswordService {
   /**
-   * Async : Encrypt password, using bcrypt library.
+   * Encrypt password, using bcrypt library.
    * @param passwordPlainText Password to hash
    * @returns Password encrypted
    */
@@ -16,7 +16,7 @@ export class PasswordService {
   }
 
   /**
-   * Async : Check password
+   * Check password
    * @param passwordPlainText Password to compare
    * @param passwordHash PasswordHash to match
    * @returns boolean

@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { APP_FILTER } from '@nestjs/core';
-import { HttpExceptionFilter } from './filters/http.exception.filter';
+import { HttpExceptionFilter } from './common/filters/http.exception.filter';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, RolesModule],
+  imports: [UsersModule, RolesModule, AuthModule],
   providers: [
     {
       provide: APP_FILTER,

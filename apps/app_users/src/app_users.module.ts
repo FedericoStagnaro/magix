@@ -4,11 +4,13 @@ import { RolesModule } from './roles/roles.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { Role } from './roles/entities/role.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     RolesModule,
     UsersModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       database: 'app_users',
       type: 'mysql',

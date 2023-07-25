@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { RolesController } from './roles.controller';
 import { ClientsModule } from '@nestjs/microservices';
-import { CustomClientNatsProxy } from '../clientProxy/custom.client.nats.proxy';
+import { CustomClientNatsProxy } from '../common/proxy/custom.client.nats.proxy';
 
 @Module({
   imports: [
