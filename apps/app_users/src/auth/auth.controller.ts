@@ -36,6 +36,7 @@ export class AuthController {
       const payload = {
         id: user.id,
         username: credentialsAuthDto.username,
+        roleId: user.roleId,
       };
 
       return { token: await this.jwtService.signAsync(payload) };
