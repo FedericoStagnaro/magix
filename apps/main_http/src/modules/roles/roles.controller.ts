@@ -7,16 +7,14 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { RolesService } from './roles.service';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
+import { RoleService } from '../services/roles/role.service';
 
 @Controller('roles')
 export class RolesController {
-  constructor(private readonly rolesService: RolesService) {}
+  constructor(private readonly rolesService: RoleService) {}
 
   @Post()
-  async create(@Body() createRoleDto: CreateRoleDto) {
+  async create(@Body() createRoleDto) {
     return await this.rolesService.create(createRoleDto);
   }
 
@@ -31,7 +29,7 @@ export class RolesController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
+  async update(@Param('id') id: string, @Body() updateRoleDto) {
     return await this.rolesService.update(+id, updateRoleDto);
   }
 

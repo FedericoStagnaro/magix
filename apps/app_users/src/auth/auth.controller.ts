@@ -14,7 +14,6 @@ import { jwtConstant } from './constant';
 @Controller()
 export class AuthController {
   constructor(
-    // private readonly authService: AuthService,
     private readonly usersService: UsersService,
     private readonly passwordService: PasswordService,
     private readonly jwtService: JwtService,
@@ -51,8 +50,6 @@ export class AuthController {
 
   @MessagePattern('loginToken')
   async loginToken(@Payload() tokenAuth: TokenAuthDto) {
-    console.log('Llego al loginToken');
-
     try {
       const payload = await this.jwtService.verifyAsync(tokenAuth.token, {
         secret: jwtConstant.secret,

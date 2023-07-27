@@ -4,16 +4,13 @@ import {
   ExecutionContext,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { RolesService } from '../../roles/roles.service';
 import { Reflector } from '@nestjs/core';
+import { RoleService } from '../role.service';
 import { ROLES_KEY } from '../decorators/role.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(
-    private roleService: RolesService,
-    private reflector: Reflector,
-  ) {}
+  constructor(private roleService: RoleService, private reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const requiredRoles = this.reflector.getAllAndOverride<string[]>(
