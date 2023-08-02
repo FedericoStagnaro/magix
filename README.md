@@ -11,7 +11,26 @@ La finalidad es incorporar estrategias de desarrollo y experiencia en el proceso
 |------|-------|
 |  Garrick Ollivander nos encarga un sistema de software para la administracion de su negocio "Tienda de Varitas Ollivanders en el Callejón Diagon"    |   ![alt text](https://static.wikia.nocookie.net/harrypotter/images/c/c2/Harry_Potter_in_Ollivanders_PM.png/revision/latest?cb=20161208051711)    | 
 
+## Objetivos
+  ✅ Servicio de usuarios <br/>
+  ✅ Autenticación y autorización basada en roles <br/>
+  ⬜ Servicio de gestion de productos  <br/>
+  ⬜ Servicio de venta <br/>
+  ⬜ Servicio de adm. de envios <br/>
+  ⬜ Manifiestos kubernetes y Docker <br/>
+  ⬜ ... <br/>
 
+## Tecnologías
+  <p>
+    <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white">
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white">
+    <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
+    <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white">
+    <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
+  </p>
 
 ## Instalacion
 
@@ -31,9 +50,6 @@ $ npm run start:dev
 # correr cada microservicio
 $ nest start --watch nombre_servicio
 ```
-
-## Support
-
 
 ## License
 
