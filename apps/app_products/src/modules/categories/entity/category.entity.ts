@@ -1,9 +1,9 @@
 import {
   Column,
   Entity,
-  OneToMany,
+  // OneToMany,
   PrimaryGeneratedColumn,
-  Relation,
+  // Relation,
 } from 'typeorm';
 
 @Entity()

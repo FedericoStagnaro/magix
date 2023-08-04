@@ -9,11 +9,6 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @MessagePattern('createCategory')
-  createCategory() {
-    console.log();
-  }
-
-  @MessagePattern('createCategory')
   async create(@Payload() createCategory: CreateCategoryDto) {
     return await this.categoriesService.create(createCategory);
   }
